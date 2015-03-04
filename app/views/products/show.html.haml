@@ -1,0 +1,30 @@
+#post_show
+	%h1= @product.name
+	%p.username
+		Shared by
+		= @product.user.name
+		about
+		= time_ago_in_words(@product.created_at)
+	.clearfix
+		.post_image_description
+			= image_tag @product.image.url(:medium)
+			.description= simple_format(@product.description)
+		.post_data
+			
+		
+			- if @product.user == current_user
+				= link_to "Edit", edit_product_path(@product), class: "data"
+		#random_post
+			%h3 Random Inspiration
+			.product
+				.product_image
+					= link_to (image_tag @random_product.image.url(:medium)), product_path(@random_product)
+				.product_description
+					.title
+						%h2= link_to @random_product.name, product_path(@random_product)
+					.data.clearfix
+						%p.username
+							Shared by
+							= @random_product.user.name
+						%p.buttons
+						
